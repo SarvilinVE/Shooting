@@ -8,6 +8,7 @@ public abstract class Character : NetworkBehaviour
     protected Action OnUpdateAction { get; set; }
     protected abstract FireAction fireAction { get; set; }
     [SyncVar] protected Vector3 serverPosition;
+    [SyncVar] protected Quaternion serverRotation;
 
     protected virtual void Initiate()
     {
@@ -25,9 +26,10 @@ public abstract class Character : NetworkBehaviour
     }
 
     [Command]
-    protected void CmdUpdatePosition(Vector3 position)
+    protected void CmdUpdatePosition(Vector3 position, Quaternion rotation)
     {
         serverPosition = position;
+        serverRotation = rotation;
     }
     public abstract void Movement();
 }
