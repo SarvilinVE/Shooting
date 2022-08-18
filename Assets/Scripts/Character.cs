@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public abstract class Character : NetworkBehaviour
 {
     protected Action OnUpdateAction { get; set; }
-    protected abstract FireAction fireAction { get; set; }
+    protected abstract FireAction FireAction { get; set; }
     [SyncVar] protected Vector3 serverPosition;
     [SyncVar] protected Quaternion serverRotation;
 

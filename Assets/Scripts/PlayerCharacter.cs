@@ -8,12 +8,12 @@ public class PlayerCharacter : Character
     private CharacterController characterController;
     private MouseLook mouseLook;
     private Vector3 currentVelocity;
-    protected override FireAction fireAction { get; set; }
+    protected override FireAction FireAction { get; set; }
     protected override void Initiate()
     {
         base.Initiate();
-        fireAction = gameObject.AddComponent<RayShooter>();
-        fireAction.Reloading();
+        FireAction = gameObject.AddComponent<RayShooter>();
+        FireAction.Reloading();
         characterController = GetComponentInChildren<CharacterController>();
         characterController ??= gameObject.AddComponent<CharacterController>();
         mouseLook = GetComponentInChildren<MouseLook>();
@@ -47,7 +47,7 @@ public class PlayerCharacter : Character
             transform.position = Vector3.SmoothDamp(transform.position,
                 serverPosition, ref currentVelocity, movingSpeed * Time.deltaTime);
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, serverRotation, Time.deltaTime);
+            transform.rotation = serverRotation;
         }
     }
     private void Start()
@@ -60,7 +60,7 @@ public class PlayerCharacter : Character
         {
             return;
         }
-        var info = $"Health: {health}\nClip: {fireAction.BulletCount}";
+        var info = $"Health: {health}\nClip: {FireAction.BulletCount}";
         var size = 12;
         var bulletCountSize = 50;
         var posX = Camera.main.pixelWidth / 2 - size / 4;
